@@ -15,7 +15,14 @@ compile '/stylesheet/' do
 end
 
 compile '*' do
-  filter :erb
+  case item[:extension]
+    when 'md'
+      filter :bluecloth
+    when 'haml'
+      filter :haml
+    when 'erb'
+      filter :erb
+  end
   layout 'default'
 end
 
